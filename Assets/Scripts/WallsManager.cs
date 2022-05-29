@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WallsManager : MonoBehaviour
 {
-    [SerializeField] private GameObject[] _walls;
+    [SerializeField] private Wall[] _walls;
 
     void Start()
     {
@@ -12,7 +12,7 @@ public class WallsManager : MonoBehaviour
         for (int i = 0; i < _walls.Length; i++)
         {
             if (i == 0) continue;
-            _walls[i].SetActive(false);
+            _walls[i].ToggleActive(false);
         }
     }
 
@@ -25,14 +25,14 @@ public class WallsManager : MonoBehaviour
         if(Input.anyKeyDown)
         {
             // Disable currently activated wall
-            _walls[_activeWall].SetActive(false);
+            _walls[_activeWall].ToggleActive(false);
 
             // Iterate activated wall variable, then wrap it around if it goes past the end of the list
             _activeWall++;
             if (_activeWall > _walls.Length-1) _activeWall = 0;
 
             // Activate new wall
-            _walls[_activeWall].SetActive(true);
+            _walls[_activeWall].ToggleActive(true);
         }
     }
 }
